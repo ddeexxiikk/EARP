@@ -1,13 +1,28 @@
 from mysql.connector import connect, Error
+import requests
+from bs4 import BeautifulSoup
 
+def tcp():
+    try:
+        page = requests.get('https://github.com/ZuzGom/remote/blob/main/tcp.txt')
+    except requests.exceptions.ConnectionError:
+        linia = None
+    else:       
+        soup = BeautifulSoup(page.content, 'html.parser')
+        linia = str(soup.find("td", {"id": "LC1"})).split()[-1][9:-5]                        
+    return linia
+
+
+#Function which connect with database
 def polaczenie():
+    url = tcp().split(':')
     try:
         connection = connect(
-        #Tutaj trzeba wpisac HOSTA - jak Zuzia i Kuba dokoncza serwer
-            host=" ",
+            host=url[1][2:],
+            port=url[2],
             user="ul",
             password="earp123",
-            database="Baza_EARP"
+            database="Dane"
         )
         return connection
     except Error:
@@ -29,13 +44,13 @@ def execute_read_query(connection, query):
 global temp1, temp2, waga, humi, AcceX, AcceY, AcceZ, RotX, RotY, RotZ
 
 def do_pliku():
-    connection = connection()
+    connection = polaczenie()
     
     if(connection!=Null):
         select_query = "SELECT temperature, AdditionalTemperature, Weight, Humidity, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ FROM Measurements"
-         query = execute_read_query(connection, select_query)[-1]
+        query = execute_read_query(connection, select_query)[-1]
          
-         connection.close()
+        connection.close()
          
         #Temperatura wewnatrz - temp1
         temp1 = str(query[0])
@@ -55,12 +70,24 @@ def do_pliku():
         AcceZ = str(query[6])
         
         #Rotacja
-        RotX = str(query[7)
+        RotX = str(query[7])
         RotY = str(query[8])
         RotZ = str(query[9])
+    
+    else:
         
-        return temp1, temp2, waga, humi, AcceX, AcceY, AcceZ, RotX, RotY, RotZ
-
+        temp1 = "0"
+        temp2 = "0"
+        waga = "0"
+        humi = "0"
+        AcceX = "0"
+        AcceY = "0"
+        AcceZ = "0"
+        RotX = "0"
+        RotY = "0"
+        RotZ = "0"
+        
+       
 do_pliku()
 
 myfile = open("daneZbazy.txt", "w")
