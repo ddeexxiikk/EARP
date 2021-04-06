@@ -1,0 +1,1 @@
+Nic tu nie ma. Trzeba dopiero wtłaczać tekst tutaj z pliku C++

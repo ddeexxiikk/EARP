@@ -3,7 +3,7 @@ from mysql.connector import connect, Error
 def polaczenie():
     try:
         connection = connect(
-        #Tutaj trzeba wpisac HOSTA
+        #Tutaj trzeba wpisac HOSTA - jak Zuzia i Kuba dokoncza serwer
             host=" ",
             user="ul",
             password="earp123",
@@ -25,17 +25,8 @@ def execute_read_query(connection, query):
     except Error:
         result = None
         return result
-    
-temp1 = "22.7" 
-temp2 = "23.76" 
-waga = "1261.22"
-humi = "65"
-AcceX = "10.7"
-AcceY = "-0.34"
-AcceZ = "-0.83"
-RotX = "-0.19"
-RotY = "-0.18"
-RotZ = "0"
+
+global temp1, temp2, waga, humi, AcceX, AcceY, AcceZ, RotX, RotY, RotZ
 
 def do_pliku():
     connection = connection()
@@ -73,7 +64,5 @@ def do_pliku():
 do_pliku()
 
 myfile = open("daneZbazy.txt", "w")
-
 myfile.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + humi + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
-
 myfile.close()
