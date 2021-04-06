@@ -1,7 +1,7 @@
 22.7 - TempWEW
 23.76 - TempZEW
-65 - Wilgotnosc
 1261.22 - Waga
+65 - Wilgotnosc
 10.7 - AccelerationX
 -0.34 - AccelerationY
 -0.83 - AccelerationZ
