@@ -88,7 +88,8 @@ public:
 
     /*Trzeba dorobic procedury zmiany rotacjiX...Y...Z
     Zarowno w 'public' jak i w 'private'*/
-
+    
+    //Pewien test - nie przejmuj sie ta linijka
 };
 
 int main()
