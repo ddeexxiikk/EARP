@@ -114,9 +114,10 @@ public:
     //Tutaj beda funkcje, ktore zwracaja nam stringi z odpowiednimi tekstami, ktore później wrzucam do bazy
 };
 
+//Troche funkcje musze przerobic ale WESELE nie poczeka xd
 int main()
 {
-    std::fstream plik;
+    std::fstream plikLAST, plikPRE;
     std::string wejscie;
     int TemperaturaWEW, TemperaturaZEW, Waga, Wilgotnosc, AcceX, AcceY, AcceZ, RotX, RotY, RotZ;
 
@@ -131,7 +132,7 @@ int main()
     {
         std::getline(plik, wejscie);
         if(i==0)
-             TemperaturaWEW = stoi(wejscie);
+            TemperaturaWEW = stoi(wejscie);
         else if(i==1)
             TemperaturaZEW = stoi(wejscie);
         else if(i==2)

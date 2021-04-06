@@ -12,7 +12,6 @@ def tcp():
         linia = str(soup.find("td", {"id": "LC1"})).split()[-1][9:-5]                        
     return linia
 
-
 #Function which connect with database
 def polaczenie():
     url = tcp().split(':')
@@ -28,7 +27,6 @@ def polaczenie():
     except Error:
         connection = Null
         return connection
-    
     
 #Funkcja ktora odczytuje dane z bazy
 def execute_read_query(connection, query):
@@ -95,6 +93,7 @@ do_pliku()
 myfileLAST = open("DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + humi + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfileLAST.close()
+
 
 #Przedostatni zapis
 #Temperatura wewnatrz - temp1
