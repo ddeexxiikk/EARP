@@ -79,40 +79,39 @@ private:
 
 public:
 
-    void Zmiana_Temp(int aTempWEW, int aTempWEW2, int aTempZEW, int aTempZEW2)
+    void Zmiana_Temp(int *aTempWEW, int *aTempWEW2, int *aTempZEW, int *aTempZEW2)
     {
-        zmianatempWEW(aTempWEW, aTempWEW2);
-        zmianatempZEW(aTempZEW, aTempZEW2);
+        zmianatempWEW(*aTempWEW, *aTempWEW2);
+        zmianatempZEW(*aTempZEW, *aTempZEW2);
     }
 
-    void Zmiana_Wagi(int awaga, int awaga2)
+    void Zmiana_Wagi(int *awaga, int *awaga2)
     {
-        zmianawagi(awaga, awaga2);
+        zmianawagi(*awaga, *awaga2);
     }
 
-    void Zmiana_Wilgotnosci(int aWilgotnosc, int aWilgotnosc2)
+    void Zmiana_Wilgotnosci(int *aWilgotnosc, int *aWilgotnosc2)
     {
-        zmianawilgotnosci(aWilgotnosc, aWilgotnosc2)
+        zmianawilgotnosci(*aWilgotnosc, *aWilgotnosc2)
     }
 
-    void Zmiana_Przyspieszen(int aAcceX, int aAcceY, int aAcceZ, int aAcceX2, int aAcceY2, int aAcceZ2)
+    void Zmiana_Przyspieszen(int *aAcceX, int *aAcceY, int *aAcceZ, int* aAcceX2, int *aAcceY2, int *aAcceZ2)
     {
-        zmianaprzyspieszeniaX(aAcceX, aAcceX2);
-        zmianaprzyspieszeniaY(aAcceY, aAcceY2);
-        zmianaprzyspieszeniaZ(aAcceZ, aAcceZ2);
+        zmianaprzyspieszeniaX(*aAcceX, *aAcceX2);
+        zmianaprzyspieszeniaY(*aAcceY, *aAcceY2);
+        zmianaprzyspieszeniaZ(*aAcceZ, *aAcceZ2);
     }
 
-    void Zmiana_Rotacji(int aRotX, int aRotY, int aRotZ, int aRotX2, int aRotY2, int aRotZ2)
+    void Zmiana_Rotacji(int *aRotX, int *aRotY, int *aRotZ, int *aRotX2, int *aRotY2, int *aRotZ2)
     {
-        zmianarotaX(aRotX, aRotX2);
-        zmianarotaY(aRotY, aRotY2);
-        zmianarotaZ(aRotZ, aRotZ2);
+        zmianarotaX(*aRotX, *aRotX2);
+        zmianarotaY(*aRotY, *aRotY2);
+        zmianarotaZ(*aRotZ, *aRotZ2);
     }
 
-    //Tutaj beda funkcje, ktore zwracaja nam stringi z odpowiednimi tekstami, ktore później wrzucam do bazy
+    //Tutaj beda funkcje, ktore zwracaja nam stringi bazujące na metodach z sekcji private z odpowiednimi tekstami, ktore później wrzucam do bazy
 };
 
-//Troche funkcje musze przerobic ale WESELE nie poczeka xd
 int main()
 {
     std::fstream plikLAST, plikPRE;
@@ -189,10 +188,10 @@ int main()
 
     UL ul;
 
-    ul.Zmiana_Temp(TemperaturaWEW, TemperaturaZEW, TemperaturaWEW2, TemperaturaZEW2);
-    ul.Zmiana_Wagi(Waga, Waga2);
-    ul.Zmiana_Przyspieszen(AcceX, AcceY, AcceZ, AcceX2, AcceY2, AcceZ2);
-    ul.Zmiana_Rotacji(RotX, RotY, RotZ, RotX2, RotY2, RotZ2);
+    ul.Zmiana_Temp(&TemperaturaWEW, &TemperaturaZEW, &TemperaturaWEW2, &TemperaturaZEW2);
+    ul.Zmiana_Wagi(&Waga, &Waga2);
+    ul.Zmiana_Przyspieszen(&AcceX, &AcceY, &AcceZ, &AcceX2, &AcceY2, &AcceZ2);
+    ul.Zmiana_Rotacji(&RotX, &RotY, &RotZ, &RotX2, &RotY2, &RotZ2);
 
     return 0;
 }
