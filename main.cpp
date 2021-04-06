@@ -162,7 +162,7 @@ int main()
     return 0;
 }
 
-/* Tutaj jest wyjasnione co znaczy, ktora linia w pliku .txt
+/* Tutaj jest wyjasnione co znaczy, ktora linia w pliku daneZbazy.txt
 22.7 - TempWEW
 23.76 - TempZEW
 1261.22 - Waga
