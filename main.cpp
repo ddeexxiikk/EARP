@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+
 class UL
 {
 private:
@@ -75,7 +76,38 @@ private:
         RotZ2 = aRotZ2;
     }
 
-    //Tutaj piszemy funkcje, które analizują te dane - a teraz sprawdz public
+    //Tutaj piszemy funkcje zwracajace chyba stringi, które analizują te dane - a teraz sprawdz public
+    std::string Sprawdzenie_Temperatury_Wewnatrz(int &aTemperaturaWEW1, int &aTemperaturaWEW2)
+    {   
+        std::string wynik;
+//Musimy obczaic po ilu stopniach jest alert bo narazie są tylko 2
+        if(abs(*aTemperaturaWEW2-*aTemperaturaWEW1)<3)
+        {
+            wynik = "OK";
+        }
+        else
+        {
+            wynik = "ALERT";
+        }
+
+        return wynik;
+    }
+
+    std::string Sprawdzenie_Temperatury_Zewnatrz(int &aTemperaturaZEW1, int &aTemperaturaZEW2)
+    {
+        std::string wynik;
+//Musimy obczaic po ilu stopniach jest alert bo narazie jest tylko 11
+        if(abs(*aTemperaturaZEW2-*aTemperaturaZEW1)<11)
+        {
+            wynik = "OK";
+        }
+        else
+        {
+            wynik = "ALERT";
+        }
+
+        return wynik;
+    }
 
 public:
 
@@ -109,12 +141,12 @@ public:
         zmianarotaZ(*aRotZ, *aRotZ2);
     }
 
-    //Tutaj beda funkcje, ktore zwracaja nam stringi bazujące na metodach z sekcji private z odpowiednimi tekstami, ktore później wrzucam do bazy
+    //Tutaj beda funkcje, ktore zwracaja nam tez stringi bazujące na metodach z sekcji private z odpowiednimi tekstami, ktore później wrzucamy do pliku
 };
 
 int main()
 {
-    std::fstream plikLAST, plikPRE;
+    std::fstream plikLAST;
     std::string wejscie;
     int TemperaturaWEW, TemperaturaZEW, Waga, Wilgotnosc, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
         TemperaturaWEW2, TemperaturaZEW2, Waga2, Wilgotnosc2, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
@@ -151,6 +183,7 @@ int main()
             RotZ = stoi(wejscie);
     }
 
+    std::fstream plikPRE;
     plikLAST.close();
     plikPRE.open("DaneZBazyPRE.txt", std::ios::in);
 
@@ -192,6 +225,12 @@ int main()
     ul.Zmiana_Wagi(&Waga, &Waga2);
     ul.Zmiana_Przyspieszen(&AcceX, &AcceY, &AcceZ, &AcceX2, &AcceY2, &AcceZ2);
     ul.Zmiana_Rotacji(&RotX, &RotY, &RotZ, &RotX2, &RotY2, &RotZ2);
+
+    std::fstream plikZapis;
+
+    plikZapis.open("KodyBledow.txt", /*Trzeba uzupelnic*/)
+    //Tutaj bedzie musial nastapic zapis tych roznych alertow do pliku
+    plikZapis.close();
 
     return 0;
 }
