@@ -1,0 +1,10 @@
+22.7 - TempWEW
+23.76 - TempZEW
+65 - Wilgotnosc
+1261.22 - Waga
+10.7 - AccelerationX
+-0.34 - AccelerationY
+-0.83 - AccelerationZ
+-0.19 - RotationX
+-0.18 - RotationY
+0 - RotationZ
