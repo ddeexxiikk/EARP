@@ -1,12 +1,13 @@
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
 class UL
 {
 private:
     int TemperaturaWEW1, TemperaturaWEW2,
     TemperaturaZEW1, TemperaturaZEW2, 
     Wilgotnosc1, Wilgotnosc2, 
-    Waga1, Waga2, Waga3,
-    Opady, 
+    Waga1, Waga2, Waga3, 
     AcceX1, AcceX2,
     AcceY1, AcceY2, 
     AcceZ1, AcceZ2,
@@ -81,9 +82,11 @@ private:
         RotZ1 = aRotZ;
     }
 
+    //Tutaj piszemy funkcje, które analizują te dane - a teraz sprawdz public
+
 public:
 
-    void Zmiana_TEMP(int atempWEW, int atempZEW)
+    void Zmiana_Temp(int atempWEW, int atempZEW)
     {
         zmianatempWEW(atempWEW);
         zmianatempZEW(atempZEW);
@@ -108,10 +111,66 @@ public:
         zmianarotaZ(aRotZ);
     }
 
+    //Tutaj beda funkcje, ktore zwracaja nam stringi z odpowiednimi tekstami, ktore później wrzucam do bazy
 };
 
 int main()
 {
-    
+    std::fstream plik;
+    std::string wejscie;
+    int TemperaturaWEW, TemperaturaZEW, Waga, Wilgotnosc, AcceX, AcceY, AcceZ, RotX, RotY, RotZ;
+
+    plik.open("daneZbazy.txt", std::ios::in);
+
+    if(plik.good() == false)
+    {
+        exit(0);
+    }
+
+    for(int i=0; i<10; i++)
+    {
+        std::getline(plik, wejscie);
+        if(i==0)
+             TemperaturaWEW = stoi(wejscie);
+        else if(i==1)
+            TemperaturaZEW = stoi(wejscie);
+        else if(i==2)
+            Waga = stoi(wejscie);
+        else if(i==3)
+            Wilgotnosc = stoi(wejscie);
+        else if(i==4)
+            AcceX = stoi(wejscie);
+        else if(i==5)
+            AcceY = stoi(wejscie);
+        else if(i==6)
+            AcceZ = stoi(wejscie);
+        else if(i==7)
+            RotX = stoi(wejscie);
+        else if(i==8)
+            RotY = stoi(wejscie);
+        else if(i==9)
+            RotZ = stoi(wejscie);
+    }
+
+    UL ul;
+
+    ul.Zmiana_Temp(TemperaturaWEW, TemperaturaZEW);
+    ul.Zmiana_Wagi(Waga);
+    ul.Zmiana_Przyspieszen(AcceX, AcceY, AcceZ);
+    ul.Zmiana_Rotacji(RotX, RotY, RotZ);
+
     return 0;
 }
+
+/* Tutaj jest wyjasnione co znaczy, ktora linia w pliku .txt
+22.7 - TempWEW
+23.76 - TempZEW
+1261.22 - Waga
+65 - Wilgotnosc
+10.7 - AccelerationX
+-0.34 - AccelerationY
+-0.83 - AccelerationZ
+-0.19 - RotationX
+-0.18 - RotationY
+0 - RotationZ
+*/
