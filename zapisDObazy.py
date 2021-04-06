@@ -21,8 +21,8 @@ def execute_query(connection, query):
     try:
         cursor.execute(query)
         connection.commit()
-    except Error as e:
-        print("The error " + str(e) + " occurred")
+    except Error :
+        a=0
         
         
 ''' Tworze zarys funkcji
@@ -30,7 +30,7 @@ def nazwafunkcji():
     connection = polaczenie()
 
     if(connection!=Null):
-        insert_error =  "INSERT INTO 'nazwa tabeli' ('parametry') VALUES ('parametry do schowania')
+        insert_error =  "INSERT INTO 'nazwa tabeli' ('parametry') VALUES ('parametry')
         execute_query(connection, insert_error)
         
     connection.close()
