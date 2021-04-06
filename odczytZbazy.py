@@ -41,38 +41,39 @@ def execute_read_query(connection, query):
         result = None
         return result
 
-global temp1, temp2, waga, humi, AcceX, AcceY, AcceZ, RotX, RotY, RotZ
+global temp1, temp2, waga, humi, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2
 
 def do_pliku():
     connection = polaczenie()
     
     if(connection!=Null):
-        select_query = "SELECT temperature, AdditionalTemperature, Weight, Humidity, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ FROM Measurements"
-        query = execute_read_query(connection, select_query)[-1]
+        select_query = "SELECT temperature, AdditionalTemperature, Weight, Humidity, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ FROM Measurements ORDER BY Date"
+        query1 = execute_read_query(connection, select_query)[-1]
+        query2 = execute_read_query(connection, select_query)[-2]
          
         connection.close()
          
         #Temperatura wewnatrz - temp1
-        temp1 = str(query[0])
+        temp1 = str(query1[0])
         
         #Temperatura na zewnatrz - temp2
-        temp2 = str(query[1])
+        temp2 = str(query1[1])
         
         #Waga
-        waga = str(query[2])
+        waga = str(query1[2])
 
         #Wilgotnosc
-        humi = str(query[3])
+        humi = str(query1[3])
         
         #Przyspieszenia
-        AcceX = str(query[4])
-        AcceY = str(query[5])
-        AcceZ = str(query[6])
+        AcceX = str(query1[4])
+        AcceY = str(query1[5])
+        AcceZ = str(query1[6])
         
         #Rotacja
-        RotX = str(query[7])
-        RotY = str(query[8])
-        RotZ = str(query[9])
+        RotX = str(query1[7])
+        RotY = str(query1[8])
+        RotZ = str(query1[9])
     
     else:
         
@@ -90,6 +91,34 @@ def do_pliku():
        
 do_pliku()
 
-myfile = open("daneZbazy.txt", "w")
-myfile.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + humi + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
-myfile.close()
+#Ostatni zapis
+myfileLAST = open("DaneZBazyLAST.txt", "w")
+myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + humi + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
+myfileLAST.close()
+
+#Przedostatni zapis
+#Temperatura wewnatrz - temp1
+temp1 = str(query2[0])
+        
+#Temperatura na zewnatrz - temp2
+temp2 = str(query2[1])
+        
+#Waga
+waga = str(query2[2])
+
+#Wilgotnosc
+humi = str(query2[3])
+        
+#Przyspieszenia
+AcceX = str(query2[4])
+AcceY = str(query2[5])
+AcceZ = str(query2[6])
+        
+#Rotacja
+RotX = str(query2[7])
+RotY = str(query2[8])
+RotZ = str(query2[9])
+
+myfilePRE = open("DaneZBazyPRE.txt", "w")
+myfilePRE.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + humi + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
+myfilePRE.close()
