@@ -7,7 +7,7 @@ private:
     int TemperaturaWEW1, TemperaturaWEW2,
     TemperaturaZEW1, TemperaturaZEW2, 
     Wilgotnosc1, Wilgotnosc2, 
-    Waga1, Waga2, Waga3, 
+    Waga1, Waga2,
     AcceX1, AcceX2,
     AcceY1, AcceY2, 
     AcceZ1, AcceZ2,
@@ -15,100 +15,98 @@ private:
     RotY1, RotY2,
     RotZ1, RotZ2;
 
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianatempWEW(int atemperatura)
+    void zmianatempWEW(int aTemperatura, int aTemperatura2)
     {
-        TemperaturaWEW2 = TemperaturaWEW1;
         TemperaturaWEW1 = atemperatura;
+        TemperaturaWEW2 = atemperatura2;
     }
 
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianatempZEW(int atemperatura)
+    void zmianatempZEW(int aTemperatura, int aTemperatura2)
     {
-        TemperaturaZEW2 = TemperaturaZEW1;
         TemperaturaZEW1 = atemperatura;
+        TemperaturaZEW2 = atemperatura2;
     }
 
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianawagi(int awaga)
+    void zmianawagi(int aWaga, int aWaga2)
     {
-        if(awaga>=0)
-        {
-            Waga3 = Waga2;
-            Waga2 = Waga1;
-            Waga1= awaga;
-        }
+            Waga1 = awaga;
+            Waga2 = awaga2;
     }
 
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianaprzyspieszeniaX(int aAcceX)
+    void zmianawilgotnosci(int aWilgotnosc, int aWilgotnosc2)
     {
-        AcceX2 = AcceX1;
+        Wilgotnosc1 = aWilgotnosc;
+        Wilgotnosc2 = aWilgotnosc2;
+    }
+
+    void zmianaprzyspieszeniaX(int aAcceX, int aAcceX2)
+    {
         AcceX1 = aAcceX;
+        AcceX2 = aAcceX2;
     }
 
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianaprzyspieszeniaY(int aAcceY)
+    void zmianaprzyspieszeniaY(int aAcceY, int aAcceY2)
     {
-        AcceY2 = AcceY1;
         AcceY1 = aAcceY;
+        AcceY2 = aAcceY2;
     }
-
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianaprzyspieszeniaZ(int aAcceZ)
+   
+    void zmianaprzyspieszeniaZ(int aAcceZ, int aAcceZ2)
     {
-        AcceZ2 = AcceZ1;
         AcceZ1 = aAcceZ;
+        AcceZ2 = aAcceZ2;
     }
-
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianarotaX(int aRotX)
+    
+    void zmianarotaX(int aRotX, int aRotX2)
     {
-        RotX2 = RotX2;
         RotX1 = aRotX;
+        RotX2 = aRotX2;
     }
 
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianarotaY(int aRotY)
+    void zmianarotaY(int aRotY, int aRotY2)
     {
-        RotY2 = RotY2;
         RotY1 = aRotY;
+        RotY2 = aRotY2;
     }
 
-    //Trzeba obmyslic jak przy starcie programu przechowywac stare wartosci 'maybe jakies wskaznik do pamieci RAM' ale to musze poczytac o czasu zycia zmiennych i jak go wydluzyc
-    void zmianarotaZ(int aRotZ)
+    void zmianarotaZ(int aRotZ, int aRotZ2)
     {
-        RotZ2 = RotZ2;
         RotZ1 = aRotZ;
+        RotZ2 = aRotZ2;
     }
 
     //Tutaj piszemy funkcje, które analizują te dane - a teraz sprawdz public
 
 public:
 
-    void Zmiana_Temp(int atempWEW, int atempZEW)
+    void Zmiana_Temp(int aTempWEW, int aTempWEW2, int aTempZEW, int aTempZEW2)
     {
-        zmianatempWEW(atempWEW);
-        zmianatempZEW(atempZEW);
+        zmianatempWEW(aTempWEW, aTempWEW2);
+        zmianatempZEW(aTempZEW, aTempZEW2);
     }
 
-    void Zmiana_Wagi(int awaga)
+    void Zmiana_Wagi(int awaga, int awaga2)
     {
-        zmianawagi(awaga);
+        zmianawagi(awaga, awaga2);
     }
 
-    void Zmiana_Przyspieszen(int aAcceX, int aAcceY, int aAcceZ)
+    void Zmiana_Wilgotnosci(int aWilgotnosc, int aWilgotnosc2)
     {
-        zmianaprzyspieszeniaX(aAcceX);
-        zmianaprzyspieszeniaY(aAcceY);
-        zmianaprzyspieszeniaZ(aAcceZ);
+        zmianawilgotnosci(aWilgotnosc, aWilgotnosc2)
     }
 
-    void Zmiana_Rotacji(int aRotX, int aRotY, int aRotZ)
+    void Zmiana_Przyspieszen(int aAcceX, int aAcceY, int aAcceZ, int aAcceX2, int aAcceY2, int aAcceZ2)
     {
-        zmianarotaX(aRotX);
-        zmianarotaY(aRotY);
-        zmianarotaZ(aRotZ);
+        zmianaprzyspieszeniaX(aAcceX, aAcceX2);
+        zmianaprzyspieszeniaY(aAcceY, aAcceY2);
+        zmianaprzyspieszeniaZ(aAcceZ, aAcceZ2);
+    }
+
+    void Zmiana_Rotacji(int aRotX, int aRotY, int aRotZ, int aRotX2, int aRotY2, int aRotZ2)
+    {
+        zmianarotaX(aRotX, aRotX2);
+        zmianarotaY(aRotY, aRotY2);
+        zmianarotaZ(aRotZ, aRotZ2);
     }
 
     //Tutaj beda funkcje, ktore zwracaja nam stringi z odpowiednimi tekstami, ktore później wrzucam do bazy
@@ -119,18 +117,19 @@ int main()
 {
     std::fstream plikLAST, plikPRE;
     std::string wejscie;
-    int TemperaturaWEW, TemperaturaZEW, Waga, Wilgotnosc, AcceX, AcceY, AcceZ, RotX, RotY, RotZ;
+    int TemperaturaWEW, TemperaturaZEW, Waga, Wilgotnosc, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
+        TemperaturaWEW2, TemperaturaZEW2, Waga2, Wilgotnosc2, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
 
-    plik.open("daneZbazy.txt", std::ios::in);
+    plikLAST.open("DaneZBazyLAST.txt", std::ios::in);
 
-    if(plik.good() == false)
+    if(plikLAST.good() == false)
     {
         exit(0);
     }
 
     for(int i=0; i<10; i++)
     {
-        std::getline(plik, wejscie);
+        std::getline(plikLAST, wejscie);
         if(i==0)
             TemperaturaWEW = stoi(wejscie);
         else if(i==1)
@@ -153,12 +152,47 @@ int main()
             RotZ = stoi(wejscie);
     }
 
+    plikLAST.close();
+    plikPRE.open("DaneZBazyPRE.txt", std::ios::in);
+
+    if(plikPRE.good() == false)
+    {
+        exit(0);
+    }
+
+    for(int i=0; i<10; i++)
+    {
+        std::getline(plikPRE, wejscie);
+        if(i==0)
+            TemperaturaWEW2 = stoi(wejscie);
+        else if(i==1)
+            TemperaturaZEW2 = stoi(wejscie);
+        else if(i==2)
+            Waga2 = stoi(wejscie);
+        else if(i==3)
+            Wilgotnosc2 = stoi(wejscie);
+        else if(i==4)
+            AcceX2 = stoi(wejscie);
+        else if(i==5)
+            AcceY2 = stoi(wejscie);
+        else if(i==6)
+            AcceZ2 = stoi(wejscie);
+        else if(i==7)
+            RotX2 = stoi(wejscie);
+        else if(i==8)
+            RotY2 = stoi(wejscie);
+        else if(i==9)
+            RotZ2 = stoi(wejscie);
+    }
+
+    plikPRE.close();
+
     UL ul;
 
-    ul.Zmiana_Temp(TemperaturaWEW, TemperaturaZEW);
-    ul.Zmiana_Wagi(Waga);
-    ul.Zmiana_Przyspieszen(AcceX, AcceY, AcceZ);
-    ul.Zmiana_Rotacji(RotX, RotY, RotZ);
+    ul.Zmiana_Temp(TemperaturaWEW, TemperaturaZEW, TemperaturaWEW2, TemperaturaZEW2);
+    ul.Zmiana_Wagi(Waga, Waga2);
+    ul.Zmiana_Przyspieszen(AcceX, AcceY, AcceZ, AcceX2, AcceY2, AcceZ2);
+    ul.Zmiana_Rotacji(RotX, RotY, RotZ, RotX2, RotY2, RotZ2);
 
     return 0;
 }
