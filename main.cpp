@@ -106,7 +106,9 @@ private:
         if(((Waga2-Waga1)>0)&&((Waga2-Waga1)<=2))
             wynik = "Ucieczka Roju z Ula";
         else if(((Waga2-Waga1)>0)&&((Waga2-Waga1)>2))
-            wynik = "ALERT"
+            wynik = "ALERT";
+        else
+            wynik = "OK";
 
         return wynik;
     }
@@ -144,11 +146,27 @@ public:
     }
 
     //Tutaj beda funkcje, ktore zwracaja nam tez stringi bazujące na metodach z sekcji private z odpowiednimi tekstami, ktore później wrzucamy do pliku
+
+    std::string Temperatura_Wewnatrz()
+    {
+        return Sprawdzenie_Temperatury_Wewnatrz();
+    }
+
+    std::string Roznica_Temperatur()
+    {
+        return Sprawdzenie_Roznicy_Temperatur_W_Ulu();
+    }
+
+    std::string Waga_Ula()
+    {
+        return Sprawdzenie_Wagi();
+    }
+
 };
 
 int main()
 {
-    sleep(15);
+    Sleep(15);
 
     std::fstream plikLAST;
     std::string wejscie;
@@ -228,15 +246,15 @@ int main()
     ul.Zmiana_Przyspieszen(&AcceX, &AcceY, &AcceZ, &AcceX2, &AcceY2, &AcceZ2);
     ul.Zmiana_Rotacji(&RotX, &RotY, &RotZ, &RotX2, &RotY2, &RotZ2);
 
-    std::fstream plikZapis;
+    std::fstream plikZAPIS;
 
-    plikZapis.open("KodyBledow.txt", std::ios::out | std::ios::trunc);
+    plikZAPIS.open("KodyBledow.txt", std::ios::out | std::ios::trunc);
     
-    if(plikZapis.good() == false)
+    if(plikZAPIS.good() == false)
         exit(0);
     
 
-    plikZapis.close();
+    plikZAPIS.close();
 
     printf("Koniec :)");
 
