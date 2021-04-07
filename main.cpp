@@ -22,7 +22,6 @@ private:
         TemperaturaWEW2 = atemperatura2;
     }
 
-//Robimy test :)
 
     void zmianatempZEW(int aTemperatura, int aTemperatura2)
     {
