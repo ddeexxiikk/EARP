@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -18,20 +19,20 @@ private:
 
     void zmianatempWEW(int aTemperatura, int aTemperatura2)
     {
-        TemperaturaWEW1 = atemperatura;
-        TemperaturaWEW2 = atemperatura2;
+        TemperaturaWEW1 = aTemperatura;
+        TemperaturaWEW2 = aTemperatura2;
     }
 
     void zmianatempZEW(int aTemperatura, int aTemperatura2)
     {
-        TemperaturaZEW1 = atemperatura;
-        TemperaturaZEW2 = atemperatura2;
+        TemperaturaZEW1 = aTemperatura;
+        TemperaturaZEW2 = aTemperatura2;
     }
 
     void zmianawagi(int aWaga, int aWaga2)
     {
-            Waga1 = awaga;
-            Waga2 = awaga2;
+            Waga1 = aWaga;
+            Waga2 = aWaga2;
     }
 
     void zmianawilgotnosci(int aWilgotnosc, int aWilgotnosc2)
@@ -77,34 +78,35 @@ private:
     }
 
     //Tutaj piszemy funkcje zwracajace chyba stringi, które analizują te dane - a teraz sprawdz public
-    std::string Sprawdzenie_Temperatury_Wewnatrz(int &aTemperaturaWEW1, int &aTemperaturaWEW2)
+    std::string Sprawdzenie_Temperatury_Wewnatrz()
     {   
         std::string wynik;
-//Musimy obczaic po ilu stopniach jest alert bo narazie są tylko 2
-        if(abs(*aTemperaturaWEW2-*aTemperaturaWEW1)<3)
-        {
-            wynik = "OK";
-        }
+        if(abs(TemperaturaWEW2-TemperaturaWEW1)>2)
+            wynik = "Temperatura w Ulu szybko sie obnizyla";
         else
-        {
-            wynik = "ALERT";
-        }
+            wynik = "OK";
 
         return wynik;
     }
 
-    std::string Sprawdzenie_Temperatury_Zewnatrz(int &aTemperaturaZEW1, int &aTemperaturaZEW2)
+    std::string Sprawdzenie_Roznicy_Temperatur_W_Ulu()
     {
         std::string wynik;
-//Musimy obczaic po ilu stopniach jest alert bo narazie jest tylko 11
-        if(abs(*aTemperaturaZEW2-*aTemperaturaZEW1)<11)
-        {
-            wynik = "OK";
-        }
+        if(abs(TemperaturaZEW1-TemperaturaWEW1)>9)
+            wynik = "Strasznie duza roznica temperatur pomiedzy Ulem a Otoczeniem";
         else
-        {
-            wynik = "ALERT";
-        }
+            wynik = "OK";
+
+        return wynik;
+    }
+
+    std::string Sprawdzenie_Wagi()
+    {
+        std::string wynik;
+        if(((Waga2-Waga1)>0)&&((Waga2-Waga1)<=2))
+            wynik = "Ucieczka Roju z Ula";
+        else if(((Waga2-Waga1)>0)&&((Waga2-Waga1)>2))
+            wynik = "ALERT"
 
         return wynik;
     }
@@ -124,7 +126,7 @@ public:
 
     void Zmiana_Wilgotnosci(int *aWilgotnosc, int *aWilgotnosc2)
     {
-        zmianawilgotnosci(*aWilgotnosc, *aWilgotnosc2)
+        zmianawilgotnosci(*aWilgotnosc, *aWilgotnosc2);
     }
 
     void Zmiana_Przyspieszen(int *aAcceX, int *aAcceY, int *aAcceZ, int* aAcceX2, int *aAcceY2, int *aAcceZ2)
@@ -146,6 +148,8 @@ public:
 
 int main()
 {
+    sleep(15);
+
     std::fstream plikLAST;
     std::string wejscie;
     int TemperaturaWEW, TemperaturaZEW, Waga, Wilgotnosc, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
@@ -188,9 +192,7 @@ int main()
     plikPRE.open("DaneZBazyPRE.txt", std::ios::in);
 
     if(plikPRE.good() == false)
-    {
         exit(0);
-    }
 
     for(int i=0; i<10; i++)
     {
@@ -221,16 +223,22 @@ int main()
 
     UL ul;
 
-    ul.Zmiana_Temp(&TemperaturaWEW, &TemperaturaZEW, &TemperaturaWEW2, &TemperaturaZEW2);
+    ul.Zmiana_Temp(&TemperaturaWEW, &TemperaturaWEW2, &TemperaturaZEW,&TemperaturaZEW2);
     ul.Zmiana_Wagi(&Waga, &Waga2);
     ul.Zmiana_Przyspieszen(&AcceX, &AcceY, &AcceZ, &AcceX2, &AcceY2, &AcceZ2);
     ul.Zmiana_Rotacji(&RotX, &RotY, &RotZ, &RotX2, &RotY2, &RotZ2);
 
     std::fstream plikZapis;
 
-    plikZapis.open("KodyBledow.txt", /*Trzeba uzupelnic*/)
-    //Tutaj bedzie musial nastapic zapis tych roznych alertow do pliku
+    plikZapis.open("KodyBledow.txt", std::ios::out | std::ios::trunc);
+    
+    if(plikZapis.good() == false)
+        exit(0);
+    
+
     plikZapis.close();
+
+    printf("Koniec :)");
 
     return 0;
 }
