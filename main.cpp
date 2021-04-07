@@ -82,7 +82,7 @@ private:
     {   
         std::string wynik;
         if(abs(TemperaturaWEW2-TemperaturaWEW1)>2)
-            wynik = "Temperatura w Ulu szybko sie obnizyla";
+            wynik = "Temperatura w Ulu szybko sie obnizyla\n";
         else
             wynik = "OK";
 
@@ -93,7 +93,7 @@ private:
     {
         std::string wynik;
         if(abs(TemperaturaZEW1-TemperaturaWEW1)>9)
-            wynik = "Strasznie duza roznica temperatur pomiedzy Ulem a Otoczeniem";
+            wynik = "Strasznie duza roznica temperatur pomiedzy Ulem a Otoczeniem\n";
         else
             wynik = "OK";
 
@@ -104,9 +104,9 @@ private:
     {
         std::string wynik;
         if(((Waga2-Waga1)>0)&&((Waga2-Waga1)<=2))
-            wynik = "Ucieczka Roju z Ula";
+            wynik = "Ucieczka Roju z Ula\n";
         else if(((Waga2-Waga1)>0)&&((Waga2-Waga1)>2))
-            wynik = "ALERT";
+            wynik = "Ul zbyt szybko przybral na wadze!\n";
         else
             wynik = "OK";
 
@@ -166,19 +166,18 @@ public:
 
 int main()
 {
-    Sleep(15);
-
     std::fstream plikLAST;
     std::string wejscie;
     int TemperaturaWEW, TemperaturaZEW, Waga, Wilgotnosc, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
         TemperaturaWEW2, TemperaturaZEW2, Waga2, Wilgotnosc2, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
 
+    //Program czeka 15 sekund, gdyby nastapilo opoznienie z zapisem do pliku w Pythonie
+    Sleep(15000);
+
     plikLAST.open("DaneZBazyLAST.txt", std::ios::in);
 
     if(plikLAST.good() == false)
-    {
         exit(0);
-    }
 
     for(int i=0; i<10; i++)
     {
@@ -206,6 +205,7 @@ int main()
     }
 
     std::fstream plikPRE;
+
     plikLAST.close();
     plikPRE.open("DaneZBazyPRE.txt", std::ios::in);
 
@@ -252,11 +252,17 @@ int main()
     
     if(plikZAPIS.good() == false)
         exit(0);
+
+    if(ul.Temperatura_Wewnatrz() != "OK")
+        plikZAPIS << ul.Temperatura_Wewnatrz();
+
+    if(ul.Roznica_Temperatur() != "OK")
+        plikZAPIS << ul.Roznica_Temperatur();
     
+    if(ul.Waga_Ula() != "OK")
+        plikZAPIS << ul.Waga_Ula();
 
     plikZAPIS.close();
-
-    printf("Koniec :)");
 
     return 0;
 }

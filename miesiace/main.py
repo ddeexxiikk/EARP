@@ -1,6 +1,7 @@
 from mysql.connector import connect, Error
 from bs4 import BeautifulSoup
 import requests
+import datetime
 
 def tcp():
     try:
@@ -28,29 +29,38 @@ def polaczenie():
         connection = Null
         return connection
     
-#Funkcja przekazuje dane do bazy
-def execute_query(connection, query):
+#Funkcja ktora odczytuje dane z bazy
+def execute_read_query(connection, query):
     cursor = connection.cursor()
     try:
         cursor.execute(query)
-        connection.commit()
-    except Error :
-        a=0
-        
-        
-''' Tworze zarys funkcji
-def nazwafunkcji():
+        result = cursor.fetchall()
+        return result
+    except Error:
+        result = None
+        return result
+
+global teraz, miesiac
+
+def sprawdzenie_miodu():
     connection = polaczenie()
-
+    teraz = datetime.datetime.now()
+    miesiac = str(teraz.month())
+    
     if(connection!=Null):
-        insert_error =  "INSERT INTO 'nazwa tabeli' ('parametry') VALUES ('parametry')
-        execute_query(connection, insert_error)
+        select_query = "SELECT Weight FROM Measurements WHERE (Month = " + str(miesiac) + " AND Day = 15 AND Hour = 20)" 
+        query = execute_read_query(connection, seletct_query)[-1]
         
-    connection.close()
+        connection.close()
+        
+        waga = str(query[0])
+    else:
+        waga = "0"
+    
+    return waga
 
-myfile = open("KodyBledow.txt", "r")
-'Trzeba jakos przemyslec zapisywanie zmiennych pojedynczo z kazdej linii'
-tresc = myfile.read()
+waga = sprawdzenie_miodu()
 
+myfile = open( str(miesiac) + ".txt", "w")
+myfile.write(waga)
 myfile.close()
-'''

@@ -1,6 +1,6 @@
 from mysql.connector import connect, Error
-import requests
 from bs4 import BeautifulSoup
+import requests
 
 def tcp():
     try:
