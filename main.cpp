@@ -149,15 +149,15 @@ int main()
 
     //std::fstream plikLAST;
     //std::string wejscie;
-    int TemperaturaWEW=15, TemperaturaZEW=20, Waga=7, Wilgotnosc=50, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
-        TemperaturaWEW2=15, TemperaturaZEW2=21, Waga2=9, Wilgotnosc2=80, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
+    int TemperaturaWEW=15, TemperaturaZEW=20, Waga=7, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
+        TemperaturaWEW2=15, TemperaturaZEW2=21, Waga2=9, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
     /*
     plikLAST.open("DaneZBazyLAST.txt", std::ios::in);
 
     if(plikLAST.good() == false)
         exit(0);
 
-    for(int i=0; i<10; i++)
+    for(int i=0; i<9; i++)
     {
         std::getline(plikLAST, wejscie);
         if(i==0)
@@ -167,18 +167,16 @@ int main()
         else if(i==2)
             Waga = stoi(wejscie);
         else if(i==3)
-            Wilgotnosc = stoi(wejscie);
-        else if(i==4)
             AcceX = stoi(wejscie);
-        else if(i==5)
+        else if(i==4)
             AcceY = stoi(wejscie);
-        else if(i==6)
+        else if(i==5)
             AcceZ = stoi(wejscie);
-        else if(i==7)
+        else if(i==6)
             RotX = stoi(wejscie);
-        else if(i==8)
+        else if(i==7)
             RotY = stoi(wejscie);
-        else if(i==9)
+        else if(i==8)
             RotZ = stoi(wejscie);
     }
     
@@ -191,7 +189,7 @@ int main()
     if(plikPRE.good() == false)
         exit(0);
 
-    for(int i=0; i<10; i++)
+    for(int i=0; i<9; i++)
     {
         std::getline(plikPRE, wejscie);
         if(i==0)
@@ -201,18 +199,16 @@ int main()
         else if(i==2)
             Waga2 = stoi(wejscie);
         else if(i==3)
-            Wilgotnosc2 = stoi(wejscie);
-        else if(i==4)
             AcceX2 = stoi(wejscie);
-        else if(i==5)
+        else if(i==4)
             AcceY2 = stoi(wejscie);
-        else if(i==6)
+        else if(i==5)
             AcceZ2 = stoi(wejscie);
-        else if(i==7)
+        else if(i==6)
             RotX2 = stoi(wejscie);
-        else if(i==8)
+        else if(i==7)
             RotY2 = stoi(wejscie);
-        else if(i==9)
+        else if(i==8)
             RotZ2 = stoi(wejscie);
     }
 
@@ -248,7 +244,6 @@ int main()
 22.7 - TempWEW
 23.76 - TempZEW
 1261.22 - Waga
-65 - Wilgotnosc
 10.7 - AccelerationX
 -0.34 - AccelerationY
 -0.83 - AccelerationZ

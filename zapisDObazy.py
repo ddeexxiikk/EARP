@@ -1,6 +1,6 @@
 import subprocess
 from mysql.connector import connect, Error
-import datetime 
+import datetime
 from time import sleep
 from notify_run import Notify
 
