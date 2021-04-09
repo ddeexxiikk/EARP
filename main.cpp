@@ -81,7 +81,7 @@ private:
     std::string Sprawdzenie_Temperatury_Wewnatrz()
     {   
         std::string wynik;
-        if(abs(TemperaturaWEW2-TemperaturaWEW1)>2)
+        if(abs(TemperaturaWEW2-TemperaturaWEW1)>=2)
             wynik = "Temperatura w Ulu szybko sie obnizyla\n";
         else
             wynik = "OK";
