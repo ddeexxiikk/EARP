@@ -51,15 +51,6 @@ def push_alert(id, error, tresc):
     
     connection.close()
 
-def push_analiza(tresc):
-    connection = polaczenie()
-
-    if(connection!=Null):
-        insert_error =  "INSERT INTO Alerty ( id, tekst ) VALUES ( 5, \""+ str(tresc) + "\" )"
-        execute_query(connection, insert_error)
-        
-    connection.close()
-
 def alert(id_ul,code,message):
     channel = 'admin'
     url = 'http://127.0.0.1:5030/admin'
@@ -77,6 +68,6 @@ myfile = open("KodyBledow.txt", "r")
 
 for x in myfile:
     tresc = myfile.readline()
-    push_analiza(tresc)
+    alert(1, 5, str(tresc))
 
 myfile.close()

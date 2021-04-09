@@ -22,6 +22,7 @@ def polaczenie():
         return connection
     except Error as e:
         print(e)
+        
 def execute_query(connection, query):
     cursor = connection.cursor()
     try:
