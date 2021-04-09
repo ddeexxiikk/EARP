@@ -80,37 +80,28 @@ private:
     //Tutaj piszemy funkcje zwracajace chyba stringi, które analizują te dane - a teraz sprawdz public
     std::string Sprawdzenie_Temperatury_Wewnatrz()
     {   
-        std::string wynik;
         if(abs(TemperaturaWEW2-TemperaturaWEW1)>=2)
-            wynik = "Temperatura w Ulu szybko sie obnizyla\n";
+            return "Temperatura w Ulu szybko sie obnizyla\n";
         else
-            wynik = "OK";
-
-        return wynik;
+            return "OK";
     }
 
     std::string Sprawdzenie_Roznicy_Temperatur_W_Ulu()
     {
-        std::string wynik;
         if(abs(TemperaturaZEW1-TemperaturaWEW1)>9)
-            wynik = "Strasznie duza roznica temperatur pomiedzy Ulem a Otoczeniem\n";
+            return "Strasznie duza roznica temperatur pomiedzy Ulem a Otoczeniem\n";
         else
-            wynik = "OK";
-
-        return wynik;
+           return "OK";
     }
 
     std::string Sprawdzenie_Wagi()
     {
-        std::string wynik;
         if(((Waga2-Waga1)>0)&&((Waga2-Waga1)<=2))
-            wynik = "Ucieczka Roju z Ula\n";
+           return "Ucieczka Roju z Ula\n";
         else if(((Waga2-Waga1)>0)&&((Waga2-Waga1)>2))
-            wynik = "Ul zbyt szybko przybral na wadze!\n";
+            return "Ul zbyt szybko przybral na wadze!\n";
         else
-            wynik = "OK";
-
-        return wynik;
+            return "OK";
     }
 
 public:
