@@ -6,6 +6,7 @@ from notify_run import Notify
 
 nf = Notify()
 
+#Very important function which help in connecting to database
 def tcp():
     try:
         page = requests.get('https://github.com/ZuzGom/remote/blob/main/tcp.txt')
@@ -41,7 +42,7 @@ def execute_query(connection, query):
     except Error :
         #Nic nie robi
         a=0
-            
+        
 def push_alert(id, error, tresc):
     connection = polaczenie()
     
