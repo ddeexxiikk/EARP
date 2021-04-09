@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <string>
+#include <ctime>
 
 class UL
 {
@@ -34,43 +36,37 @@ private:
             Waga2 = aWaga2;
     }
 
-    void zmianawilgotnosci(int aWilgotnosc, int aWilgotnosc2)
-    {
-        Wilgotnosc1 = aWilgotnosc;
-        Wilgotnosc2 = aWilgotnosc2;
-    }
-
-    void zmianaprzyspieszeniaX(int aAcceX, int aAcceX2)
+    void zmianaprzyspieszeniaX(float aAcceX, float aAcceX2)
     {
         AcceX1 = aAcceX;
         AcceX2 = aAcceX2;
     }
 
-    void zmianaprzyspieszeniaY(int aAcceY, int aAcceY2)
+    void zmianaprzyspieszeniaY(float aAcceY, float aAcceY2)
     {
         AcceY1 = aAcceY;
         AcceY2 = aAcceY2;
     }
    
-    void zmianaprzyspieszeniaZ(int aAcceZ, int aAcceZ2)
+    void zmianaprzyspieszeniaZ(float aAcceZ, float aAcceZ2)
     {
         AcceZ1 = aAcceZ;
         AcceZ2 = aAcceZ2;
     }
     
-    void zmianarotaX(int aRotX, int aRotX2)
+    void zmianarotaX(float aRotX, float aRotX2)
     {
         RotX1 = aRotX;
         RotX2 = aRotX2;
     }
 
-    void zmianarotaY(int aRotY, int aRotY2)
+    void zmianarotaY(float aRotY, float aRotY2)
     {
         RotY1 = aRotY;
         RotY2 = aRotY2;
     }
 
-    void zmianarotaZ(int aRotZ, int aRotZ2)
+    void zmianarotaZ(float aRotZ, float aRotZ2)
     {
         RotZ1 = aRotZ;
         RotZ2 = aRotZ2;
@@ -78,8 +74,9 @@ private:
 
     //Tutaj piszemy funkcje zwracajace chyba stringi, które analizują te dane - a teraz sprawdz public
     std::string Sprawdzenie_Temperatury_Wewnatrz()
-    {   
-        if(abs(TemperaturaWEW2-TemperaturaWEW1)>=2)
+    {   if(TemperaturaWEW1<0)
+            return "Temperatura w Ulu jest ponizej 0\n";
+        else if(abs(TemperaturaWEW2-TemperaturaWEW1)>=2)
             return "Temperatura w Ulu szybko sie obnizyla\n";
         else
             return "OK";
@@ -87,10 +84,18 @@ private:
 
     std::string Sprawdzenie_Wagi()
     {
-        if(((Waga2-Waga1)>0)&&((Waga2-Waga1)<=2))
-           return "Ucieczka Roju z Ula\n";
-        else if(((Waga2-Waga1)>0)&&((Waga2-Waga1)>2))
+        if((Waga1 > Waga2) && (Waga1 - Waga2) > 2)
             return "Ul zbyt szybko przybral na wadze!\n";
+        else if((Waga2 > Waga1) && (Waga2 - Waga1) <=2)
+            return "Ucieczka Roju z Ula\n";
+        else
+            return "OK";
+    }
+
+    std::string Sprawdzenie_Przesuniecia()
+    {
+        if(AcceX1 != AcceX2 || AcceY1 != AcceY2 || AcceZ1 != AcceZ2 || RotX1 != RotX2 || RotY1 != RotY2 || RotZ1 != RotZ2)
+            return "Ul sie poruszyl";
         else
             return "OK";
     }
@@ -108,12 +113,7 @@ public:
         zmianawagi(*awaga, *awaga2);
     }
 
-    void Zmiana_Wilgotnosci(int *aWilgotnosc, int *aWilgotnosc2)
-    {
-        zmianawilgotnosci(*aWilgotnosc, *aWilgotnosc2);
-    }
-
-    void Zmiana_Przyspieszen(int *aAcceX, int *aAcceY, int *aAcceZ, int* aAcceX2, int *aAcceY2, int *aAcceZ2)
+    void Zmiana_Przyspieszen(int *aAcceX, int *aAcceY, int *aAcceZ, int *aAcceX2, int *aAcceY2, int *aAcceZ2)
     {
         zmianaprzyspieszeniaX(*aAcceX, *aAcceX2);
         zmianaprzyspieszeniaY(*aAcceY, *aAcceY2);
@@ -139,6 +139,11 @@ public:
         return Sprawdzenie_Wagi();
     }
 
+    std::string Przesuniecie_Ula()
+    {
+        return Sprawdzenie_Przesuniecia();
+    }
+
 };
 
 int main()
@@ -148,8 +153,8 @@ int main()
 
     std::fstream plikLAST;
     std::string wejscie;
-    int TemperaturaWEW=15, TemperaturaZEW=20, Waga=7, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
-        TemperaturaWEW2=15, TemperaturaZEW2=21, Waga2=9, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
+    int TemperaturaWEW, TemperaturaZEW, Waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
+        TemperaturaWEW2, TemperaturaZEW2, Waga2, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
     
     plikLAST.open("DaneZBazyLAST.txt", std::ios::in);
 
@@ -179,7 +184,6 @@ int main()
             RotZ = stoi(wejscie);
     }
     
-
     std::fstream plikPRE;
 
     plikLAST.close();
@@ -221,7 +225,6 @@ int main()
     ul.Zmiana_Rotacji(&RotX, &RotY, &RotZ, &RotX2, &RotY2, &RotZ2);
 
     std::fstream plikZAPIS;
-
     plikZAPIS.open("KodyBledow.txt", std::ios::out | std::ios::trunc);
     
     if(plikZAPIS.good() == false)
@@ -233,19 +236,10 @@ int main()
     if(ul.Waga_Ula() != "OK")
         plikZAPIS << ul.Waga_Ula();
 
+    if(ul.Przesuniecie_Ula()!="OK")
+        plikZAPIS << ul.Przesuniecie_Ula();
+
     plikZAPIS.close();
 
     return 0;
 }
-
-/* Tutaj jest wyjasnione co znaczy, ktora linia w pliku daneZbazy.txt
-22.7 - TempWEW
-23.76 - TempZEW
-1261.22 - Waga
-10.7 - AccelerationX
--0.34 - AccelerationY
--0.83 - AccelerationZ
--0.19 - RotationX
--0.18 - RotationY
-0 - RotationZ
-*/
