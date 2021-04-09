@@ -48,8 +48,8 @@ def sprawdzenie_miodu():
     miesiac = str(teraz.month())
     
     if(connection!=Null):
-        select_query = "SELECT Weight FROM Measurements WHERE (Month = " + str(miesiac) + " AND Day = 15 AND Hour = 20)" 
-        query = execute_read_query(connection, seletct_query)[-1]
+        select_query = "SELECT Weight FROM Measurements WHERE (Month = " + str(miesiac) + " AND Day = 15 AND Hour = 19)"
+        query = execute_read_query(connection, select_query)[-1]
         
         connection.close()
         

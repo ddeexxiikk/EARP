@@ -1,5 +1,6 @@
 from mysql.connector import connect, Error
 from bs4 import BeautifulSoup
+import datetime 
 import requests
 
 def tcp():
@@ -85,8 +86,7 @@ def do_pliku():
         RotX = "0"
         RotY = "0"
         RotZ = "0"
-        
-       
+            
 do_pliku()
 
 #Ostatni zapis
