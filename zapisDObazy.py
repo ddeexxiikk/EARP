@@ -1,6 +1,10 @@
+import subprocess
 from mysql.connector import connect, Error
-from bs4 import BeautifulSoup
-import requests
+import datetime 
+from time import sleep
+from notify_run import Notify
+
+nf = Notify()
 
 def tcp():
     try:
@@ -38,8 +42,16 @@ def execute_query(connection, query):
         #Nic nie robi
         a=0
             
-#Tworze zarys funkcji
-def nazwafunkcji(tresc):
+def push_alert(id, error, tresc):
+    connection = polaczenie()
+    
+    if(connection!=None):
+        inserting_error = "INSERT INTO Alerty ( id, error, tekst ) VALUES ( " + str(id) + ", " + str(error) + ", \"" + tresc + "\" )"
+        execute_query(connection, inserting_error)
+    
+    connection.close()
+
+def push_analiza(tresc):
     connection = polaczenie()
 
     if(connection!=Null):
@@ -48,10 +60,23 @@ def nazwafunkcji(tresc):
         
     connection.close()
 
+def alert(id_ul,code,message):
+    channel = 'admin'
+    url = 'http://127.0.0.1:5030/admin'
+    if id_ul == 1:
+        channel = '40CiRtPlbZUFnkHg'
+        url = 'https://notify.run/' + channel
+    
+    f = open('/home/pi/.config/notify-run', 'w')
+    f.write("{\"endpoint\": \""+str(url)+"\"}")
+    f.close()
+    nf.send(message)
+    push_alert(id_ul,code,message)
+
 myfile = open("KodyBledow.txt", "r")
 
 for x in myfile:
     tresc = myfile.readline()
-    nazwafunkcji(tresc)
+    push_analiza(tresc)
 
 myfile.close()
