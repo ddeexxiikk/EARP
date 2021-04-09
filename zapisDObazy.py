@@ -35,22 +35,23 @@ def execute_query(connection, query):
         cursor.execute(query)
         connection.commit()
     except Error :
+        #Nic nie robi
         a=0
-        
-        
-''' Tworze zarys funkcji
-def nazwafunkcji():
+            
+#Tworze zarys funkcji
+def nazwafunkcji(tresc):
     connection = polaczenie()
 
     if(connection!=Null):
-        insert_error =  "INSERT INTO 'nazwa tabeli' ('parametry') VALUES ('parametry')
+        insert_error =  "INSERT INTO Alerty ( id, tekst ) VALUES ( 5, \""+ str(tresc) + "\" )"
         execute_query(connection, insert_error)
         
     connection.close()
 
 myfile = open("KodyBledow.txt", "r")
-'Trzeba jakos przemyslec zapisywanie zmiennych pojedynczo z kazdej linii'
-tresc = myfile.read()
+
+for x in myfile:
+    tresc = myfile.readline()
+    nazwafunkcji(tresc)
 
 myfile.close()
-'''
