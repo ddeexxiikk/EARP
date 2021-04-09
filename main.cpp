@@ -86,14 +86,6 @@ private:
             return "OK";
     }
 
-    std::string Sprawdzenie_Roznicy_Temperatur_W_Ulu()
-    {
-        if(abs(TemperaturaZEW1-TemperaturaWEW1)>9)
-            return "Strasznie duza roznica temperatur pomiedzy Ulem a Otoczeniem\n";
-        else
-           return "OK";
-    }
-
     std::string Sprawdzenie_Wagi()
     {
         if(((Waga2-Waga1)>0)&&((Waga2-Waga1)<=2))
@@ -141,11 +133,6 @@ public:
     std::string Temperatura_Wewnatrz()
     {
         return Sprawdzenie_Temperatury_Wewnatrz();
-    }
-
-    std::string Roznica_Temperatur()
-    {
-        return Sprawdzenie_Roznicy_Temperatur_W_Ulu();
     }
 
     std::string Waga_Ula()
@@ -247,9 +234,6 @@ int main()
     if(ul.Temperatura_Wewnatrz() != "OK")
         plikZAPIS << ul.Temperatura_Wewnatrz();
 
-    if(ul.Roznica_Temperatur() != "OK")
-        plikZAPIS << ul.Roznica_Temperatur();
-    
     if(ul.Waga_Ula() != "OK")
         plikZAPIS << ul.Waga_Ula();
 
