@@ -8,7 +8,6 @@ class UL
 private:
     int TemperaturaWEW1, TemperaturaWEW2,
     TemperaturaZEW1, TemperaturaZEW2, 
-    Wilgotnosc1, Wilgotnosc2, 
     Waga1, Waga2,
     AcceX1, AcceX2,
     AcceY1, AcceY2, 
@@ -147,11 +146,11 @@ int main()
     //Program czeka 15 sekund, gdyby nastapilo opoznienie z zapisem do pliku w Pythonie
     Sleep(15000);
 
-    //std::fstream plikLAST;
-    //std::string wejscie;
+    std::fstream plikLAST;
+    std::string wejscie;
     int TemperaturaWEW=15, TemperaturaZEW=20, Waga=7, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
         TemperaturaWEW2=15, TemperaturaZEW2=21, Waga2=9, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
-    /*
+    
     plikLAST.open("DaneZBazyLAST.txt", std::ios::in);
 
     if(plikLAST.good() == false)
@@ -213,7 +212,6 @@ int main()
     }
 
     plikPRE.close();
-*/
 
     UL ul;
 
