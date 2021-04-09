@@ -147,11 +147,11 @@ int main()
     //Program czeka 15 sekund, gdyby nastapilo opoznienie z zapisem do pliku w Pythonie
     Sleep(15000);
 
-    std::fstream plikLAST;
-    std::string wejscie;
-    int TemperaturaWEW, TemperaturaZEW, Waga, Wilgotnosc, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
-        TemperaturaWEW2, TemperaturaZEW2, Waga2, Wilgotnosc2, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
-
+    //std::fstream plikLAST;
+    //std::string wejscie;
+    int TemperaturaWEW=15, TemperaturaZEW=20, Waga=7, Wilgotnosc=50, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
+        TemperaturaWEW2=15, TemperaturaZEW2=21, Waga2=9, Wilgotnosc2=80, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
+    /*
     plikLAST.open("DaneZBazyLAST.txt", std::ios::in);
 
     if(plikLAST.good() == false)
@@ -181,6 +181,7 @@ int main()
         else if(i==9)
             RotZ = stoi(wejscie);
     }
+    
 
     std::fstream plikPRE;
 
@@ -216,6 +217,7 @@ int main()
     }
 
     plikPRE.close();
+*/
 
     UL ul;
 
