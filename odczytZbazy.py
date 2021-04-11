@@ -38,13 +38,13 @@ def execute_read_query(connection, query):
     
 global temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac
 
-temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"
+temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac = "0", "0", "0", "0", "0", "0", "0", "0", "0", "00000000000","0",
 
 
 def do_pliku():
     connection = polaczenie()
     teraz = datetime.datetime.now()
-    miesiac = str(teraz.month())
+    miesiac = str(teraz.month)
     
     if(connection!=None):
         select_query = "SELECT temperature, AdditionalTemperature, Weight, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ FROM Measurements ORDER BY Date"
@@ -81,9 +81,10 @@ def do_pliku():
     
     else:
         print('brak polaczenia')
-            
-do_pliku()
-
+try:            
+    do_pliku()
+except IndexError:
+    print('Bati napraw to')
 #Ostatni zapis
 myfileLAST = open("DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
