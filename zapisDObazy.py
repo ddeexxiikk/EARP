@@ -53,17 +53,20 @@ def alert(id_ul,code,message):
     if id_ul == 1:
         channel = '40CiRtPlbZUFnkHg'
         url = 'https://notify.run/' + channel
-    
-    f = open('/home/pi/.config/notify-run', 'w')
+    try:
+        f = open('/root/.config/notify-run', 'w')
+    except PermissionError:
+        f = open('/home/pi/.config/notify-run', 'w')
     f.write("{\"endpoint\": \""+str(url)+"\"}")
     f.close()
     nf.send(message)
     push_alert(id_ul,code,message)
-    
+
+alert(0,0,"witam")
 myfile = open("KodyBledow.txt", "r")
 
 for x in myfile:
     tresc = myfile.readline()
-    alert(1, 5, str(tresc))
+    #alert(1, 5, str(tresc))
     
 myfile.close()
