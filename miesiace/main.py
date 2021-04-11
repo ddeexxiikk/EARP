@@ -13,6 +13,8 @@ def tcp():
         linia = str(soup.find("td", {"id": "LC1"})).split()[-1][9:-5]                        
     return linia
 
+global connection=Null
+
 #Function which connect with database
 def polaczenie():
     url = tcp().split(':')
@@ -40,7 +42,7 @@ def execute_read_query(connection, query):
         result = None
         return result
 
-global teraz, miesiac
+global miesiac="0"
 
 def sprawdzenie_miodu():
     connection = polaczenie()
@@ -61,6 +63,6 @@ def sprawdzenie_miodu():
 
 waga = sprawdzenie_miodu()
 
-myfile = open( str(miesiac) + ".txt", "w")
+myfile = open(str(miesiac) + ".txt", "w")
 myfile.write(waga)
 myfile.close()

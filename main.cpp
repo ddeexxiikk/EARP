@@ -72,7 +72,7 @@ private:
         RotZ2 = aRotZ2;
     }
 
-    //Tutaj piszemy funkcje zwracajace chyba stringi, które analizują te dane - a teraz sprawdz public
+    //Tutaj piszemy funkcje, które analizują te dane
     std::string Sprawdzenie_Temperatury_Wewnatrz()
     {   if(TemperaturaWEW1<0)
             return "Temperatura w Ulu jest ponizej 0\n";
@@ -128,7 +128,6 @@ public:
     }
 
     //Tutaj beda funkcje, ktore zwracaja nam tez stringi bazujące na metodach z sekcji private z odpowiednimi tekstami, ktore później wrzucamy do pliku
-
     std::string Temperatura_Wewnatrz()
     {
         return Sprawdzenie_Temperatury_Wewnatrz();

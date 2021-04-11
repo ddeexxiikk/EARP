@@ -13,6 +13,8 @@ def tcp():
         linia = str(soup.find("td", {"id": "LC1"})).split()[-1][9:-5]                        
     return linia
 
+global connection=Null
+
 #Function which connect with database
 def polaczenie():
     url = tcp().split(':')
@@ -40,7 +42,7 @@ def execute_read_query(connection, query):
         result = None
         return result
 
-global temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2
+global temp1="0", temp2="0", waga="0", AcceX="0", AcceY="0", AcceZ="0", RotX="0", RotY="0", RotZ="0", query2="0"
 
 def do_pliku():
     connection = polaczenie()
@@ -72,16 +74,6 @@ def do_pliku():
         RotZ = str(query1[8])
     
     else:
-        
-        temp1 = "0"
-        temp2 = "0"
-        waga = "0"
-        AcceX = "0"
-        AcceY = "0"
-        AcceZ = "0"
-        RotX = "0"
-        RotY = "0"
-        RotZ = "0"
             
 do_pliku()
 
@@ -90,6 +82,16 @@ myfileLAST = open("DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfileLAST.close()
 
+temp1="0" 
+temp2="0"
+waga="0"
+AcceX="0"
+AcceY="0"
+AcceZ="0"
+RotX="0"
+RotY="0"
+RotZ="0"
+query2="0"
 
 #Przedostatni zapis
 #Temperatura wewnatrz - temp1
