@@ -46,6 +46,7 @@ def push_alert(id, error, tresc):
         execute_query(connection, inserting_error)
     
     connection.close()
+    
 def alert(id_ul,code,message):
     channel = 'admin'
     url = 'http://127.0.0.1:5030/admin'
@@ -58,8 +59,11 @@ def alert(id_ul,code,message):
     f.close()
     nf.send(message)
     push_alert(id_ul,code,message)
+    
 myfile = open("KodyBledow.txt", "r")
+
 for x in myfile:
     tresc = myfile.readline()
     alert(1, 5, str(tresc))
+    
 myfile.close()

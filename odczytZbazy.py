@@ -38,7 +38,7 @@ def execute_read_query(connection, query):
     
 global temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2
 
-temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2 = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0000000000000000"
+temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2 = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"
 
 
 def do_pliku():
