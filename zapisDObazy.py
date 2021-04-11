@@ -25,7 +25,7 @@ def polaczenie():
         )
         return connection
     except Error:
-        connection = Null
+        connection = None
         return connection
     
 #Funkcja przekazuje dane do bazy
@@ -49,7 +49,7 @@ def push_alert(id, error, tresc):
     
 def alert(id_ul,code,message):
     channel = 'admin'
-    url = 'http://127.0.0.1:5030/admin'
+    url = 'https://notify.run/mO3yfQmLdbxvMoIj'
     if id_ul == 1:
         channel = '40CiRtPlbZUFnkHg'
         url = 'https://notify.run/' + channel
