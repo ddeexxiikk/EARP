@@ -34,7 +34,7 @@ def execute_read_query(connection, query):
         result = None
         return result
 
-temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0",
+temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac, query2 = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0","0000000000"
 
 
 def do_pliku():
@@ -89,7 +89,7 @@ except Exception as e:
     print(e)
     print('Bati napraw to')
     
-print("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
+#print("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 #Ostatni zapis
 myfileLAST = open("DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
