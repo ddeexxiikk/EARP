@@ -8,13 +8,9 @@ from notify_run import Notify
 nf = Notify()
 
 #Very important function which help in connecting to database
-def tcp():
-    fil = open('/home/pi/remote/tcp.txt')                      
-    return fil.readline()
 
 #Function which connect with database
 def polaczenie():
-    url = tcp().split(':')
     try:
         connection = connect(
             host='localhost',
@@ -62,11 +58,11 @@ def alert(id_ul,code,message):
     nf.send(message)
     push_alert(id_ul,code,message)
 
-alert(0,0,"witam")
+#alert(0,0,"witam")
 myfile = open("KodyBledow.txt", "r")
 
 for x in myfile:
-    tresc = myfile.readline()
-    #alert(1, 5, str(tresc))
+    #tresc = myfile.readline()
+    alert(1, 5, str(x))
     
 myfile.close()

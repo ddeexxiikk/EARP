@@ -3,9 +3,6 @@ from bs4 import BeautifulSoup
 import datetime 
 import requests
 
-def tcp():
-    fil = open('/home/pi/remote/tcp.txt')                      
-    return fil.readline()
 
 global connection
 connection=None
@@ -34,7 +31,7 @@ def execute_read_query(connection, query):
         result = None
         return result
 
-temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0",
+temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac, query2 = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0","0000000000"
 
 
 def do_pliku():
@@ -49,8 +46,11 @@ def do_pliku():
         
         #Takie cos do liczenia wagi ula w srodku miesiaca... do analizy po paru miesiacach
         select_queried = "SELECT Weight FROM Measurements WHERE (Month = " + str(miesiac) + " AND Day = 15 AND Hour = 19)"
-        query3 = execute_read_query(connection, select_queried)[-1]
-        waga = str(query3)
+        try:
+            query3 = execute_read_query(connection, select_queried)[-1]
+            waga = str(query3)
+        except:
+            print("nie ma 15 dnia jeszcze")
         #Tu sie konczy to cos
         
         connection.close()
@@ -78,6 +78,7 @@ def do_pliku():
     
     else:
         print('brak polaczenia')
+        
     
 try:            
     temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac = do_pliku()
@@ -85,6 +86,7 @@ except Exception as e:
     print(e)
     print('Bati napraw to')
     
+#print("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 #Ostatni zapis
 myfileLAST = open("DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
@@ -117,3 +119,5 @@ RotZ = str(query2[8])
 myfilePRE = open("DaneZBazyPRE.txt", "w")
 myfilePRE.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfilePRE.close()
+
+
