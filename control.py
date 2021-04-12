@@ -1,7 +1,8 @@
+#!/usr/bin/env python3
 import subprocess
 from time import sleep
-exec(open('odczytZbazy.py').read())
+exec(open('/var/www/html/Analiza/odczytZbazy.py').read())
 sleep(5)
-subprocess.Popen('./main')
+subprocess.Popen('/var/www/html/Analiza/main')
 sleep(5)
-exec(open('zapisDObazy.py').read())
+exec(open('/var/www/html/Analiza/zapisDObazy.py').read())

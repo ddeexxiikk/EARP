@@ -88,11 +88,11 @@ except Exception as e:
     
 #print("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 #Ostatni zapis
-myfileLAST = open("DaneZBazyLAST.txt", "w")
+myfileLAST = open("/var/www/html/Analiza/DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfileLAST.close()
 
-myfile = open(str(miesiac) + "waga.txt", "w")
+myfile = open("/var/www/html/Analiza/"+str(miesiac) + "waga.txt", "w")
 myfile.write(waga)
 myfile.close()
 
@@ -116,7 +116,7 @@ RotX = str(query2[6])
 RotY = str(query2[7])
 RotZ = str(query2[8])
 
-myfilePRE = open("DaneZBazyPRE.txt", "w")
+myfilePRE = open("/var/www/html/Analiza/DaneZBazyPRE.txt", "w")
 myfilePRE.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfilePRE.close()
 print('koniec odczytu')

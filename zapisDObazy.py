@@ -60,7 +60,7 @@ def alert(id_ul,code,message):
     push_alert(id_ul,code,message)
 
 #alert(0,0,"witam")
-myfile = open("KodyBledow.txt", "r")
+myfile = open("/var/www/html/Analiza/KodyBledow.txt", "r")
 
 for x in myfile:
     #tresc = myfile.readline()
