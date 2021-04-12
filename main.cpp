@@ -1,4 +1,3 @@
-#include <windows.h>
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -147,9 +146,6 @@ public:
 
 int main()
 {
-    //Program czeka 15 sekund, gdyby nastapilo opoznienie z zapisem do pliku w Pythonie
-    Sleep(15000);
-
     std::fstream plikLAST;
     std::string wejscie;
     int TemperaturaWEW, TemperaturaZEW, Waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
