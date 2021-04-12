@@ -85,7 +85,7 @@ private:
     {
         if((Waga1 > Waga2) && (Waga1 - Waga2) > 2)
             return "Ul zbyt szybko przybral na wadze!\n";
-        else if((Waga2 > Waga1) && (Waga2 - Waga1) <=2)
+        else if((Waga2 > Waga1) && (Waga2 - Waga1) <=2 && (Waga2-Waga1) != 0)
             return "Ucieczka Roju z Ula\n";
         else
             return "OK";
