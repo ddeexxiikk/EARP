@@ -62,7 +62,7 @@ def alert(id_ul,code,message):
 myfile = open("KodyBledow.txt", "r")
 
 for x in myfile:
-    tresc = myfile.readline()
-    alert(1, 5, str(tresc))
+    #tresc = myfile.readline()
+    alert(1, 5, str(x))
     
 myfile.close()
