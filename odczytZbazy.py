@@ -12,11 +12,9 @@ connection=None
 
 #Function which connect with database
 def polaczenie():
-    url = tcp().split(':')
     try:
         connection = connect(
             host='localhost',
-            #port=url[2],
             user="ul",
             password="earp123",
             database="Dane"
