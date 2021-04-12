@@ -165,7 +165,10 @@ int main()
         else if(i==1)
             TemperaturaZEW = stoi(wejscie);
         else if(i==2)
+        {
             Waga = stoi(wejscie);
+            Waga/=10;
+        }
         else if(i==3)
             AcceX = stoi(wejscie);
         else if(i==4)
@@ -196,7 +199,10 @@ int main()
         else if(i==1)
             TemperaturaZEW2 = stoi(wejscie);
         else if(i==2)
+            {
             Waga2 = stoi(wejscie);
+            Waga2/=10;
+        }
         else if(i==3)
             AcceX2 = stoi(wejscie);
         else if(i==4)
