@@ -35,10 +35,8 @@ def execute_read_query(connection, query):
     except Error:
         result = None
         return result
-    
-#global temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac
 
-temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac = "0", "0", "0", "0", "0", "0", "0", "0", "0", "00000000000","0",
+temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0",
 
 
 def do_pliku():
@@ -50,15 +48,15 @@ def do_pliku():
         select_query = "SELECT temperature, AdditionalTemperature, Weight, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ FROM Measurements ORDER BY Date"
         query1 = execute_read_query(connection, select_query)[-1]
         query2 = execute_read_query(connection, select_query)[-2]
-        #print(query1)
+        
         #Takie cos do liczenia wagi ula w srodku miesiaca... do analizy po paru miesiacach
         select_queried = "SELECT Weight FROM Measurements WHERE (Month = " + str(miesiac) + " AND Day = 15 AND Hour = 19)"
-        
+        query3 = execute_read_query(connection, select_queried)[-1]
+        waga = str(query3)
         #Tu sie konczy to cos
         
         connection.close()
         
-         
         #Temperatura wewnatrz - temp1
         temp1 = str(query1[0])
         
@@ -77,8 +75,7 @@ def do_pliku():
         RotX = str(query1[6])
         RotY = str(query1[7])
         RotZ = str(query1[8])
-        #query3 = execute_read_query(connection, select_queried)[-1]
-        #waga = str(query3[0])
+        
         return temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac
     
     else:
@@ -89,6 +86,7 @@ try:
 except Exception as e:
     print(e)
     print('Bati napraw to')
+    
 #Ostatni zapis
 myfileLAST = open("DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
@@ -117,7 +115,7 @@ AcceZ = str(query2[5])
 RotX = str(query2[6])
 RotY = str(query2[7])
 RotZ = str(query2[8])
-#print("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
+
 myfilePRE = open("DaneZBazyPRE.txt", "w")
 myfilePRE.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfilePRE.close()
