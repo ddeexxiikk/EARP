@@ -1,3 +1,4 @@
+print('początek zapisu')
 import subprocess
 from mysql.connector import connect, Error
 import datetime

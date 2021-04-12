@@ -119,5 +119,6 @@ RotZ = str(query2[8])
 myfilePRE = open("DaneZBazyPRE.txt", "w")
 myfilePRE.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfilePRE.close()
+print('koniec odczytu')
 
 

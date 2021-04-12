@@ -146,6 +146,7 @@ public:
 
 int main()
 {
+    printf("%s\n","Początek main.cpp");
     std::fstream plikLAST;
     std::string wejscie;
     int TemperaturaWEW, TemperaturaZEW, Waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
@@ -233,7 +234,8 @@ int main()
 
     if(ul.Przesuniecie_Ula()!="OK")
         plikZAPIS << ul.Przesuniecie_Ula();
-
+    
+    printf("%s\n","Koniec main.cpp");
     plikZAPIS.close();
 
     return 0;
