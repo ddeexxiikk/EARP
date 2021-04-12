@@ -3,9 +3,6 @@ from bs4 import BeautifulSoup
 import datetime 
 import requests
 
-def tcp():
-    fil = open('/home/pi/remote/tcp.txt')                      
-    return fil.readline()
 
 global connection
 connection=None
