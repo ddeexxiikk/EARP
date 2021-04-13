@@ -152,7 +152,7 @@ int main()
     int TemperaturaWEW, TemperaturaZEW, Waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
         TemperaturaWEW2, TemperaturaZEW2, Waga2, AcceX2, AcceY2, AcceZ2, RotX2, RotY2, RotZ2;
     
-    plikLAST.open("DaneZBazyLAST.txt", std::ios::in);
+    plikLAST.open("/var/www/html/Analiza/DaneZBazyLAST.txt", std::ios::in);
 
     if(plikLAST.good() == false)
         exit(0);
@@ -186,7 +186,7 @@ int main()
     std::fstream plikPRE;
 
     plikLAST.close();
-    plikPRE.open("DaneZBazyPRE.txt", std::ios::in);
+    plikPRE.open("/var/www/html/Analiza/DaneZBazyPRE.txt", std::ios::in);
 
     if(plikPRE.good() == false)
         exit(0);
@@ -227,7 +227,7 @@ int main()
     ul.Zmiana_Rotacji(&RotX, &RotY, &RotZ, &RotX2, &RotY2, &RotZ2);
 
     std::fstream plikZAPIS;
-    plikZAPIS.open("KodyBledow.txt", std::ios::out | std::ios::trunc);
+    plikZAPIS.open("/var/www/html/Analiza/KodyBledow.txt", std::ios::out | std::ios::trunc);
     
     if(plikZAPIS.good() == false)
         exit(0);
