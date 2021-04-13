@@ -54,7 +54,7 @@ def do_pliku():
                 myfile.write(waga)
                 myfile.close()
             except:
-                print("nie ma 15 dnia jeszcze")
+                print("Nie ma jeszcze 15 dnia " + str(miesiac) + " miesiaca")
         
         #Tu sie konczy to cos
         
@@ -117,6 +117,6 @@ RotZ = str(query2[8])
 myfilePRE = open("/var/www/html/Analiza/DaneZBazyPRE.txt", "w")
 myfilePRE.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfilePRE.close()
-print('koniec odczytu')
+print("koniec odczytu")
 
 
