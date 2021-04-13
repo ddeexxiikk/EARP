@@ -44,8 +44,7 @@ def do_pliku():
         query2 = execute_read_query(connection, select_query)[-2]
         
         #Takie cos do liczenia wagi ula w srodku miesiaca... do analizy po paru miesiacach
-        if(dzien==15 AND godzina==19 AND minuta>5 AND minuta<10):
-        {
+        if(dzien==15 and godzina==19 and minuta>5 and minuta<10):
             select_queried = "SELECT Weight FROM Measurements WHERE (Month = " + str(miesiac) + " AND Day = 15 AND Hour = 19)"
             try:
                 query3 = execute_read_query(connection, select_queried)[-1]
@@ -56,7 +55,7 @@ def do_pliku():
                 myfile.close()
             except:
                 print("nie ma 15 dnia jeszcze")
-        }
+        
         #Tu sie konczy to cos
         
         connection.close()
