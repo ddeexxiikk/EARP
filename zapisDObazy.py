@@ -1,10 +1,7 @@
-print('początek zapisu')
-import subprocess
 from mysql.connector import connect, Error
-import datetime
-from time import sleep
 from notify_run import Notify
 
+print('początek zapisu')
 nf = Notify()
 
 #Function which connect with database
@@ -56,10 +53,8 @@ def alert(id_ul,code,message):
     push_alert(id_ul,code,message)
 
 myfile = open("/var/www/html/Analiza/KodyBledow.txt", "r")
-
 for x in myfile:
     alert(1, 5, str(x))
-    
 myfile.close()
 
 print("Koniec Zapisu do Bazy Analizy")

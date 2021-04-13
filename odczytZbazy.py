@@ -1,7 +1,5 @@
 from mysql.connector import connect, Error
-from bs4 import BeautifulSoup
 import datetime 
-import requests
 
 global connection
 connection=None
@@ -104,7 +102,7 @@ except Exception as e:
 myfileLAST = open("/var/www/html/Analiza/DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfileLAST.close()
-'''
+
 
 #Przedostatni zapis
 #Temperatura wewnatrz - temp1
