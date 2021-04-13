@@ -83,9 +83,9 @@ private:
 
     std::string Sprawdzenie_Wagi()
     {
-        if((Waga1 > Waga2) && (Waga1 - Waga2) > 200)
+        if((Waga1 > Waga2) && ((Waga1 - Waga2) > 200))
             return "Ul zbyt szybko przybral na wadze!\n";
-        else if((Waga2 > Waga1) && (Waga2 - Waga1) <=200 && (Waga2-Waga1) != 0)
+        else if((Waga2 > Waga1) && ((Waga2 - Waga1) <=200) && ((Waga2-Waga1) != 0))
             return "Ucieczka Roju z Ula\n";
         else
             return "OK";
