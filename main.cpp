@@ -146,7 +146,7 @@ public:
 
 int main()
 {
-    printf("%s\n","Początek main.cpp");
+    printf("Początek main.cpp\n");
     std::fstream plikLAST;
     std::string wejscie;
     int TemperaturaWEW, TemperaturaZEW, Waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, 
@@ -182,10 +182,9 @@ int main()
         else if(i==8)
             RotZ = stoi(wejscie);
     }
-    
-    std::fstream plikPRE;
-
     plikLAST.close();
+
+    std::fstream plikPRE;
     plikPRE.open("/var/www/html/Analiza/DaneZBazyPRE.txt", std::ios::in);
 
     if(plikPRE.good() == false)
@@ -199,7 +198,7 @@ int main()
         else if(i==1)
             TemperaturaZEW2 = stoi(wejscie);
         else if(i==2)
-            {
+        {
             Waga2 = stoi(wejscie);
             Waga2/=10;
         }
@@ -216,9 +215,20 @@ int main()
         else if(i==8)
             RotZ2 = stoi(wejscie);
     }
-
     plikPRE.close();
 
+    std::fstream plikZAPIS;
+    plikZAPIS.open("/var/www/html/Analiza/KodyBledow.txt", std::ios::out | std::ios::trunc);
+
+    if( (TemperaturaWEW==0 && TemperaturaZEW==0 && Waga==0 && AcceX==0 && AcceY==0 && AcceZ==0 && RotX==0 && RotY==0 && RotZ==0 && 
+        TemperaturaWEW2==0 && TemperaturaZEW2==0 && Waga2==0 && AcceX2==0 && AcceY==0 && AcceZ2==0 && RotX2==0 && RotY2==0 && RotZ2==0) || 
+        (TemperaturaWEW==0 && TemperaturaZEW==0 && Waga==0 && AcceX==0 && AcceY==0 && AcceZ==0 && RotX==0 && RotY==0 && RotZ==0) )
+    {
+    plikZAPIS << "BLAD CZUJNIKOW\n";
+    plikZAPIS.close();
+    }
+    else
+    {
     UL ul;
 
     ul.Zmiana_Temp(&TemperaturaWEW, &TemperaturaWEW2, &TemperaturaZEW,&TemperaturaZEW2);
@@ -241,8 +251,9 @@ int main()
     if(ul.Przesuniecie_Ula()!="OK")
         plikZAPIS << ul.Przesuniecie_Ula();
     
-    printf("%s\n","Koniec main.cpp");
     plikZAPIS.close();
+    }
 
+    printf("Koniec main.cpp\n");
     return 0;
 }

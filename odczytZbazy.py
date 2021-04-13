@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import datetime 
 import requests
 
-
 global connection
 connection=None
 
@@ -33,11 +32,13 @@ def execute_read_query(connection, query):
 
 temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac, query2 = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0","0000000000"
 
-
 def do_pliku():
     connection = polaczenie()
     teraz = datetime.datetime.now()
-    miesiac = str(teraz.month)
+    miesiac = int(teraz.month)
+    dzien = int(teraz.hour)
+    godzina = int(teraz.hour)
+    minuta = int(teraz.minute)
     
     if(connection!=None):
         select_query = "SELECT temperature, AdditionalTemperature, Weight, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ FROM Measurements ORDER BY Date"
@@ -45,12 +46,19 @@ def do_pliku():
         query2 = execute_read_query(connection, select_query)[-2]
         
         #Takie cos do liczenia wagi ula w srodku miesiaca... do analizy po paru miesiacach
-        select_queried = "SELECT Weight FROM Measurements WHERE (Month = " + str(miesiac) + " AND Day = 15 AND Hour = 19)"
-        try:
-            query3 = execute_read_query(connection, select_queried)[-1]
-            waga = str(query3)
-        except:
-            print("nie ma 15 dnia jeszcze")
+        if(dzien==15 AND godzina==19 AND minuta>5 AND minuta<10):
+        {
+            select_queried = "SELECT Weight FROM Measurements WHERE (Month = " + str(miesiac) + " AND Day = 15 AND Hour = 19)"
+            try:
+                query3 = execute_read_query(connection, select_queried)[-1]
+                waga = str(query3)
+                
+                myfile = open("/var/www/html/Analiza/"+ str(miesiac) + "waga.txt", "w")
+                myfile.write(waga)
+                myfile.close()
+            except:
+                print("nie ma 15 dnia jeszcze")
+        }
         #Tu sie konczy to cos
         
         connection.close()
@@ -78,23 +86,16 @@ def do_pliku():
     
     else:
         print('brak polaczenia')
-        
     
 try:            
     temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac = do_pliku()
 except Exception as e:
-    print(e)
-    print('Bati napraw to')
+    print("Bati napraw: " + str(e))
     
-#print("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 #Ostatni zapis
 myfileLAST = open("/var/www/html/Analiza/DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfileLAST.close()
-
-myfile = open("/var/www/html/Analiza/"+str(miesiac) + "waga.txt", "w")
-myfile.write(waga)
-myfile.close()
 
 #Przedostatni zapis
 #Temperatura wewnatrz - temp1

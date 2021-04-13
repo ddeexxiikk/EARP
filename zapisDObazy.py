@@ -4,18 +4,14 @@ from mysql.connector import connect, Error
 import datetime
 from time import sleep
 from notify_run import Notify
-#import requests
 
 nf = Notify()
-
-#Very important function which help in connecting to database
 
 #Function which connect with database
 def polaczenie():
     try:
         connection = connect(
             host='localhost',
-            #port=url[2],
             user="ul",
             password="earp123",
             database="Dane"
@@ -59,11 +55,11 @@ def alert(id_ul,code,message):
     nf.send(message)
     push_alert(id_ul,code,message)
 
-#alert(0,0,"witam")
 myfile = open("/var/www/html/Analiza/KodyBledow.txt", "r")
 
 for x in myfile:
-    #tresc = myfile.readline()
     alert(1, 5, str(x))
     
 myfile.close()
+
+print("Koniec Zapisu do Bazy Analizy")
