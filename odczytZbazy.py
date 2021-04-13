@@ -28,7 +28,7 @@ def execute_read_query(connection, query):
         result = None
         return result
 
-temp1,temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac, query2 = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0","0000000000"
+temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac, query2 = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0","0000000000"
 
 def do_pliku():
     connection = polaczenie()
@@ -79,13 +79,6 @@ def do_pliku():
         RotY = str(query1[7])
         RotZ = str(query1[8])
         
-        '''Metoda 1 --- Trzeba sobie, którąś wybrać
-        #Ostatni zapis
-        myfileLAST = open("/var/www/html/Analiza/DaneZBazyLAST.txt", "w")
-        myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
-        myfileLAST.close()
-        '''
-        
         return temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac
     
     else:
@@ -96,12 +89,10 @@ try:
 except Exception as e:
     print("Bati napraw: " + str(e))
     
-'''Metoda 2 --- Trzeba sobie, którąś wybrać
 #Ostatni zapis
 myfileLAST = open("/var/www/html/Analiza/DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
 myfileLAST.close()
-'''
 
 #Przedostatni zapis
 #Temperatura wewnatrz - temp1
