@@ -34,14 +34,14 @@ def do_pliku():
     connection = polaczenie()
     teraz = datetime.datetime.now()
     miesiac = int(teraz.month)
-    dzien = int(teraz.hour)
+    dzien = int(teraz.day)
     godzina = int(teraz.hour)
     minuta = int(teraz.minute)
     
     if(connection!=None):
-        select_query = "SELECT temperature, AdditionalTemperature, Weight, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ FROM Measurements ORDER BY Date"
-        query1 = execute_read_query(connection, select_query)[-1]
-        query2 = execute_read_query(connection, select_query)[-2]
+        select_query = "SELECT temperature, AdditionalTemperature, Weight, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ, Date, Time FROM Measurements ORDER BY Datetime DESC LIMIT 2"
+        query1 = execute_read_query(connection, select_query)[0]
+        query2 = execute_read_query(connection, select_query)[1]
         
         #Takie cos do liczenia wagi ula w srodku miesiaca... do analizy po paru miesiacach
         if(dzien==15 and godzina==19 and minuta>5 and minuta<10):
@@ -53,7 +53,7 @@ def do_pliku():
                 myfile = open("/var/www/html/Analiza/"+ str(miesiac) + "waga.txt", "w")
                 myfile.write(waga)
                 myfile.close()
-            except:
+            except: 
                 print("Nie ma jeszcze 15 dnia " + str(miesiac) + " miesiaca")
         
         #Tu sie konczy to cos
@@ -87,8 +87,9 @@ def do_pliku():
 try:            
     temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac = do_pliku()
 except Exception as e:
-    print("Bati napraw: " + str(e))
+    print("Bati napraw: " + str())
     
+print(waga)   
 #Ostatni zapis
 myfileLAST = open("/var/www/html/Analiza/DaneZBazyLAST.txt", "w")
 myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
