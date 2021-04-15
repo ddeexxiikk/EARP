@@ -28,7 +28,7 @@ def execute_read_query(connection, query):
         result = None
         return result
 
-temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac, query2 = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0","0000000000"
+temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, waga, miesiac, sound, query2, data, godzina = "0", "0", "0", "0", "0", "0", "0", "0", "0", "0","0", "0", "0000000000", "0", "0"
 
 def do_pliku():
     connection = polaczenie()
@@ -39,7 +39,7 @@ def do_pliku():
     minuta = int(teraz.minute)
     
     if(connection!=None):
-        select_query = "SELECT temperature, AdditionalTemperature, Weight, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ, Date, Time FROM Measurements ORDER BY Datetime DESC LIMIT 2"
+        select_query = "SELECT Temperature, AdditionalTemperature, Weight, AccelerationX, AccelerationY, AccelerationZ, RotationX, RotationY, RotationZ, Sound, Date, Time FROM Measurements ORDER BY Datetime DESC LIMIT 2"
         query1 = execute_read_query(connection, select_query)[0]
         query2 = execute_read_query(connection, select_query)[1]
         
@@ -55,7 +55,6 @@ def do_pliku():
                 myfile.close()
             except: 
                 print("Nie ma jeszcze 15 dnia " + str(miesiac) + " miesiaca")
-        
         #Tu sie konczy to cos
         
         connection.close()
@@ -79,20 +78,27 @@ def do_pliku():
         RotY = str(query1[7])
         RotZ = str(query1[8])
         
-        return temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac
+        #Dzwiek
+        sound = str(query1[9])
+        
+        #Data i godzina
+        data = str(query1[10])
+        godzina = str(query1[11])
+        
+        return temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, sound, data, godzina, query2, miesiac,
     
     else:
         print('brak polaczenia')
     
 try:            
-    temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, query2, miesiac = do_pliku()
+    temp1, temp2, waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, sound, data, godzina, query2, miesiac = do_pliku()
 except Exception as e:
     print("Bati napraw: " + str())
     
 print(waga)   
 #Ostatni zapis
 myfileLAST = open("/var/www/html/Analiza/DaneZBazyLAST.txt", "w")
-myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
+myfileLAST.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "\n" + sound + "\n" + data + "\n" + godzina + "")
 myfileLAST.close()
 
 #Przedostatni zapis
@@ -115,8 +121,15 @@ RotX = str(query2[6])
 RotY = str(query2[7])
 RotZ = str(query2[8])
 
+#Dzwiek
+sound = str(query2[9])
+        
+#Data i godzina
+data = str(query2[10])
+godzina = str(query2[11])
+
 myfilePRE = open("/var/www/html/Analiza/DaneZBazyPRE.txt", "w")
-myfilePRE.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "")
+myfilePRE.write("" + temp1 + "\n" + temp2 + "\n" + waga + "\n" + AcceX + "\n" + AcceY + "\n" + AcceZ + "\n" + RotX + "\n" +  RotY + "\n" +  RotZ + "\n" + sound + "\n" + data + "\n" + godzina + "")
 myfilePRE.close()
 print("koniec odczytu")
 
