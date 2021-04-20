@@ -115,34 +115,44 @@ private:
 
 public:
 
-    void Zmiana_Temp(int *aTempWEW, int *aTempWEW2, int *aTempZEW, int *aTempZEW2)
+    UL(int *aTempWEW, int *aTempWEW2, int *aTempZEW, int *aTempZEW2, int *awaga, int *awaga2, int *aAcceX, int *aAcceY, int *aAcceZ, 
+    int *aAcceX2, int *aAcceY2, int *aAcceZ2, int *aRotX, int *aRotY, int *aRotZ, int *aRotX2, int *aRotY2, int *aRotZ2, int *aSound)
     {
-        zmianatempWEW(*aTempWEW, *aTempWEW2);
-        zmianatempZEW(*aTempZEW, *aTempZEW2);
+        Zmiana_Temp(*aTempWEW, *aTempWEW2, *aTempZEW, *aTempZEW2);
+        Zmiana_Wagi(*awaga, *awaga2);
+        Zmiana_Przyspieszen(*aAcceX, *aAcceY, *aAcceZ, *aAcceX2, *aAcceY2, *aAcceZ2);
+        Zmiana_Rotacji(*aRotX, *aRotY, *aRotZ, *aRotX2, *aRotY2, *aRotZ2);
+        Zmiana_Sounda(*aSound);
     }
 
-    void Zmiana_Wagi(int *awaga, int *awaga2)
+    void Zmiana_Temp(int aTempWEW, int aTempWEW2, int aTempZEW, int aTempZEW2)
     {
-        zmianawagi(*awaga, *awaga2);
+        zmianatempWEW(aTempWEW, aTempWEW2);
+        zmianatempZEW(aTempZEW, aTempZEW2);
     }
 
-    void Zmiana_Przyspieszen(int *aAcceX, int *aAcceY, int *aAcceZ, int *aAcceX2, int *aAcceY2, int *aAcceZ2)
+    void Zmiana_Wagi(int awaga, int awaga2)
     {
-        zmianaprzyspieszeniaX(*aAcceX, *aAcceX2);
-        zmianaprzyspieszeniaY(*aAcceY, *aAcceY2);
-        zmianaprzyspieszeniaZ(*aAcceZ, *aAcceZ2);
+        zmianawagi(awaga, awaga2);
     }
 
-    void Zmiana_Rotacji(int *aRotX, int *aRotY, int *aRotZ, int *aRotX2, int *aRotY2, int *aRotZ2)
+    void Zmiana_Przyspieszen(int aAcceX, int aAcceY, int aAcceZ, int aAcceX2, int aAcceY2, int aAcceZ2)
     {
-        zmianarotaX(*aRotX, *aRotX2);
-        zmianarotaY(*aRotY, *aRotY2);
-        zmianarotaZ(*aRotZ, *aRotZ2);
+        zmianaprzyspieszeniaX(aAcceX, aAcceX2);
+        zmianaprzyspieszeniaY(aAcceY, aAcceY2);
+        zmianaprzyspieszeniaZ(aAcceZ, aAcceZ2);
+    }
+
+    void Zmiana_Rotacji(int aRotX, int aRotY, int aRotZ, int aRotX2, int aRotY2, int aRotZ2)
+    {
+        zmianarotaX(aRotX, aRotX2);
+        zmianarotaY(aRotY, aRotY2);
+        zmianarotaZ(aRotZ, aRotZ2);
     }
     
-    void Zmiana_Sounda(int *aSound)
+    void Zmiana_Sounda(int aSound)
     {
-        zmianasounda(*aSound);
+        zmianasounda(aSound);
     }
 
     //Tutaj beda funkcje, ktore zwracaja nam tez stringi bazujące na metodach z sekcji private z odpowiednimi tekstami, ktore później wrzucamy do pliku
@@ -165,12 +175,11 @@ public:
     {
         return Sprawdzenie_Sounda();
     }
-
 };
 
 int main()
 {
-    printf("Początek main.cpp\n");
+    std::cout << "Poczatek main.cpp" << std::endl;
     std::fstream plikLAST;
     std::string wejscie;
     int TemperaturaWEW, TemperaturaZEW, Waga, AcceX, AcceY, AcceZ, RotX, RotY, RotZ, Sound,
@@ -245,39 +254,47 @@ int main()
         (TemperaturaWEW==0 && TemperaturaZEW==0 && Waga==0 && AcceX==0 && AcceY==0 && AcceZ==0 && RotX==0 && RotY==0 && RotZ==0 && Sound==0) )
     {
     plikZAPIS << "BLAD CZUJNIKOW\n";
+    std::cout << "BLAD CZUJNIKOW" << std::endl;
     plikZAPIS.close();
     }
     else
     {
-    UL ul;
+    UL ul(&TemperaturaWEW, &TemperaturaWEW2, &TemperaturaZEW,&TemperaturaZEW2, &Waga, &Waga2, &AcceX, &AcceY, &AcceZ, &AcceX2, &AcceY2, &AcceZ2,
+    &RotX, &RotY, &RotZ, &RotX2, &RotY2, &RotZ2, &Sound);
 
-    ul.Zmiana_Temp(&TemperaturaWEW, &TemperaturaWEW2, &TemperaturaZEW,&TemperaturaZEW2);
+    /*ul.Zmiana_Temp(&TemperaturaWEW, &TemperaturaWEW2, &TemperaturaZEW,&TemperaturaZEW2);
     ul.Zmiana_Wagi(&Waga, &Waga2);
     ul.Zmiana_Przyspieszen(&AcceX, &AcceY, &AcceZ, &AcceX2, &AcceY2, &AcceZ2);
     ul.Zmiana_Rotacji(&RotX, &RotY, &RotZ, &RotX2, &RotY2, &RotZ2);
-    ul.Zmiana_Sounda(&Sound);
+    ul.Zmiana_Sounda(&Sound);*/
 
     std::fstream plikZAPIS;
     plikZAPIS.open("/var/www/html/Analiza/KodyBledow.txt", std::ios::out | std::ios::trunc);
     
-    if(plikZAPIS.good() == false)
-        exit(0);
+        if(plikZAPIS.good() == false)
+        {
+            exit(0);
+            std::cout << "Koniec main.cpp ale nieudany zapis" << std::endl;
+        }
+        else
+        {
+            if(ul.Temperatura_Wewnatrz() != "OK")
+                plikZAPIS << ul.Temperatura_Wewnatrz();
 
-    if(ul.Temperatura_Wewnatrz() != "OK")
-        plikZAPIS << ul.Temperatura_Wewnatrz();
+            if(ul.Waga_Ula() != "OK")
+                plikZAPIS << ul.Waga_Ula();
 
-    if(ul.Waga_Ula() != "OK")
-        plikZAPIS << ul.Waga_Ula();
-
-    if(ul.Przesuniecie_Ula()!="OK")
-        plikZAPIS << ul.Przesuniecie_Ula();
+            if(ul.Przesuniecie_Ula()!="OK")
+                plikZAPIS << ul.Przesuniecie_Ula();
         
-    if(ul.Dzwiek_Ula()!="OK")
-        plikZAPIS << ul.Dzwiek_Ula();
+            if(ul.Dzwiek_Ula()!="OK")
+                plikZAPIS << ul.Dzwiek_Ula();
     
-    plikZAPIS.close();
+            plikZAPIS.close();
+        }
     }
 
-    printf("Koniec main.cpp\n");
+    std::cout << "Koniec main.cpp" << std::endl;
+    
     return 0;
 }
